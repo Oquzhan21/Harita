@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="haritaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'harita.dbo.Haritalar' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Haritalar">
+    <Key>
+      <PropertyRef Name="HaritaId" />
+    </Key>
+    <Property Name="HaritaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adres" Type="nvarchar(max)" />
+    <Property Name="x" Type="nvarchar(max)" />
+    <Property Name="y" Type="nvarchar(max)" />
+    <Property Name="Aciklama" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ilceler">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="ilce" Type="nvarchar" MaxLength="255" />
+    <Property Name="sehir" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="iller">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sehir" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'harita.dbo.maps' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="maps">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="lat" Type="nvarchar(max)" />
+    <Property Name="lng" Type="nvarchar(max)" />
+    <Property Name="comment" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityContainer Name="haritaModelStoreContainer">
+    <EntitySet Name="ilceler" EntityType="Self.ilceler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="iller" EntityType="Self.iller" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Haritalar" EntityType="Self.Haritalar" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Haritalar].[HaritaId] AS [HaritaId], 
+    [Haritalar].[Adres] AS [Adres], 
+    [Haritalar].[x] AS [x], 
+    [Haritalar].[y] AS [y], 
+    [Haritalar].[Aciklama] AS [Aciklama]
+    FROM [dbo].[Haritalar] AS [Haritalar]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="maps" EntityType="Self.maps" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [maps].[id] AS [id], 
+    [maps].[lat] AS [lat], 
+    [maps].[lng] AS [lng], 
+    [maps].[comment] AS [comment]
+    FROM [dbo].[maps] AS [maps]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
